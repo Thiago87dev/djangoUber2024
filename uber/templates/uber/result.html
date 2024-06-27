@@ -1,0 +1,21 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+
+<h1>Resultado</h1>
+{% if result %}
+    <p>{{result.gasto_por_km}}</p>
+    <p>{{result.gasto_com_comb}}</p>
+    <p>{{result.comb_com_desc}}</p>
+    <p>{{result.ganho_por_km}}</p>
+    <p>{{result.lucro}}</p>
+    <p>{{result.data_criacao}}</p> 
+    <form method="POST" action="{% url "uber:save_result" %}">
+        {% csrf_token %}
+        <button type="submit">Salvar</button>
+    </form>
+{% else %}
+    <p>Nenhum resultado</p>
+{% endif %}   
+      
+{% endblock content %}
