@@ -2,20 +2,24 @@
 
 {% block content %}
 
-<h1>Resultado</h1>
-{% if result %}
-    <p>{{result.gasto_por_km}}</p>
-    <p>{{result.gasto_com_comb}}</p>
-    <p>{{result.comb_com_desc}}</p>
-    <p>{{result.ganho_por_km}}</p>
-    <p>{{result.lucro}}</p>
-    <p>{{result.data_criacao}}</p> 
-    <form method="POST" action="{% url "uber:save_result" %}">
-        {% csrf_token %}
-        <button type="submit">Salvar</button>
-    </form>
-{% else %}
-    <p>Nenhum resultado</p>
-{% endif %}   
+<div class="result-container">
+<h1>Resultados</h1>
+    {% if result %}
+        
+            <p class="result-p"> <span>combustivel com desconto:</span> <span>R$ {{result.comb_com_desc|floatformat:2}}</span></p>
+            <p class="result-p"> <span>Gasto com combustivel:</span> <span style="color: red"> R$ {{result.gasto_com_comb|floatformat:2}}</span></p>
+            <p class="result-p"> <span>Gasto por km rodado:</span> <span style="color: red"> R$ {{result.gasto_por_km|floatformat:2}}</span></p>
+            <p class="result-p"> <span>Ganho por km rodado:</span> <span style="color: green"> R$ {{result.ganho_por_km|floatformat:2}}</span></p>
+            <p class="result-p"> <span>Horas trabalhada:</span> <span style="color: green">{{result.horas_trab}}</span></p>
+            <p class="result-p"> <span>Lucro:</span> <span style="color: green"> R$ {{result.lucro|floatformat:2}}</span></p>
+        
+        <form method="POST" action="{% url "uber:save_result" %}">
+            {% csrf_token %}
+            <button class="btn" type="submit">Salvar</button>
+        </form>
+    {% else %}
+        <p>Nenhum resultado</p>
+    {% endif %}
+</div>   
       
 {% endblock content %}

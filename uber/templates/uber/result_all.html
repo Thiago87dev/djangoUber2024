@@ -1,15 +1,37 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-
-<h1>Detalhes do resultado</h1>
-{% for result in results %}
-    <p>{{result.gasto_por_km}}</p>
-    <p>{{result.gasto_com_comb}}</p>
-    <p>{{result.comb_com_desc}}</p>
-    <p>{{result.ganho_por_km}}</p>
-    <p>{{result.lucro}}</p>
-    <p>{{result.data_criacao}}</p> 
-{% endfor %}
+<div class="result-all-container">
+    <h1>Historico</h1>
+    <table>
+        <tr>
+            <th>Data</th>
+            <th>Horas trabalhada</th>
+            <th>Gasto com comb</th>
+            <th>Gasto por km</th>
+            <th>Ganho por km</th>
+            <th>Lucro</th>
+        </tr>
+    {% for result in results %}
+            <tr class="{% cycle 'row-gray' 'row-white'%}">
+                <td><a href="{% url "uber:result_detail" result.id %}">{{result.data_criacao|date:"d/m/Y"}}</a></td>
+                <td>{{result.horas_trab}}</td>
+                <td>R$ {{result.gasto_com_comb|floatformat:2}}</td>
+                <td>R$ {{result.gasto_por_km|floatformat:2}}</td>
+                <td>R$ {{result.ganho_por_km|floatformat:2}}</td>
+                <td>R$ {{result.lucro|floatformat:2}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+</div>
     
 {% endblock content %}
+
+{% comment %} <div class="result-content">
+    <p>Data: {{result.data_criacao}}</p> 
+    <p>Gasto por km rodado: R${{result.gasto_por_km}}</p>
+    <p>Preço do combustivel com desconto: R${{result.comb_com_desc}}</p>
+    <p>Gasto com combustivel: R${{result.gasto_com_comb}}</p>
+    <p>Ganho por km rodado: R${{result.ganho_por_km}}</p>
+    <p>Lucro: R${{result.lucro}}</p>
+</div> {% endcomment %}

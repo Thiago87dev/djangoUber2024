@@ -11,7 +11,11 @@ class ResultUber(models.Model):
     comb_com_desc = models.FloatField()
     ganho_por_km = models.FloatField()
     lucro = models.FloatField()
-    data_criacao = models.DateTimeField(default=timezone.now)
+    data_criacao = models.DateField(default=timezone.now)
+    preco_comb = models.FloatField()
+    km_rodado = models.FloatField()
+    horas_trab = models.TimeField(blank=True, null=True)
+    # ganho_hora = models.FloatField()
     
     def __str__(self):
         return 'Resultados'

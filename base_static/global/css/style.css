@@ -1,3 +1,166 @@
-.titulo{
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 2rem;
+    margin: 4rem 0;
+    background-color: rgb(237, 232, 225);
+   
+}
+
+.navbar{
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.navbar ul {
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar li {
+    list-style: none;
+    font-size: 2rem;
+ 
+}
+
+a {
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    color: black;
+    position: relative;
+    border-bottom: 2px solid transparent;
+}
+
+a:hover{
+   border-bottom-color: black; 
+}
+
+.titulo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+  
+}
+
+.results-link-content{
+    display: flex;
+    margin: 0 auto;
+    justify-content: end;
+    width: 60%;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.form-content{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form-control{
+    display: flex;
+    height: 5rem;
+    gap: 2rem;
+    width: 100%;
+
+}
+
+.btn {
+    border: solid 2px rgb(65, 64, 64);
+    padding: 1rem;
+    font-size: 2rem;
+    margin-top: 1.5rem;
+    background-color: rgb(58, 58, 58);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: .3rem;
+}
+
+.btn:hover{
+    background-color: rgb(220, 220, 220);
+    color: rgb(58, 58, 58);
+}
+
+ .errorlist {
+    color: rgb(255, 0, 0);
+    font-size: 1.5rem;
+    list-style: none;
+}
+
+.result-all-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+}
+
+.result-content{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+table{
+border-collapse: collapse;
+}
+
+table th{
+    padding: 0 1.5rem 1rem 1.5rem;
+    
+}
+
+.row-gray{
+    background-color: rgb(217, 217, 217);
+}
+
+.row-white{
+    background-color: rgb(255, 255, 255);
+}
+
+table td{
+    text-align: center;
+    padding: .5rem 2rem;
+    
+}
+
+.result-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    font-size: 2.4rem;
+}
+
+.result-p{
+    display: flex;
+    width: 40rem;
+    justify-content: space-between;
+}
+
+.teste {
     background-color: red;
 }
