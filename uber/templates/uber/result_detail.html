@@ -6,12 +6,17 @@
     <h1 >Detalhes do resultado</h1>
     <p class="result-p"> <span>Data:</span> <span>{{result.data_criacao|date:"d/m/Y"}}</span></p> 
     <p class="result-p"> <span>Horas trabalhada:</span> <span>{{result.horas_trab}}</span></p> 
-    <p class="result-p"> <span>Preço combustivel:</span> <span>{{result.preco_comb|floatformat:2}}</span></p>
-    <p class="result-p"> <span>Combustivel com desconto:</span> <span>{{result.comb_com_desc|floatformat:2}}</span></p>
-    <p class="result-p"> <span>Gasto com combustivel:</span> <span style="color: red">{{result.gasto_com_comb|floatformat:2}}</span></p>
-    <p class="result-p"> <span>Gasto por km rodado:</span> <span style="color: red">{{result.gasto_por_km|floatformat:2}}</span></p>
-    <p class="result-p"> <span>Ganho por km rodado:</span> <span style="color: green">{{result.ganho_por_km|floatformat:2}}</span></p>
-    <p class="result-p"> <span>Lucro:</span> <span style="color: green">{{result.lucro|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Km rodado:</span> <span>{{result.km_rodado}}</span></p> 
+    <p class="result-p"> <span>Autonomia ( Km/L)</span> <span>{{result.km_por_litro}}</span></p> 
+    <p class="result-p"> <span>Preço combustivel:</span> <span>R$ {{result.preco_comb|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Desconto combustivel:</span> <span>{{result.desc_comb|floatformat:2}}%</span></p>
+    <p class="result-p"> <span>Combustivel com desconto:</span> <span>R$ {{result.comb_com_desc|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Faturamento</span> <span>R$ {{result.faturamento|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Gasto com combustivel:</span> <span style="color: red">R$ {{result.gasto_com_comb|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Gasto por km rodado:</span> <span style="color: red">R$ {{result.gasto_por_km|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Lucro por hora:</span> <span style="color: green">R$ {{result.ganho_hora|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Lucro por km rodado:</span> <span style="color: green">R$ {{result.ganho_por_km|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Lucro:</span> <span style="color: green">R$ {{result.lucro|floatformat:2}}</span></p>
 </div>
     
 {% endblock content %}

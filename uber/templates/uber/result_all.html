@@ -7,31 +7,51 @@
         <tr>
             <th>Data</th>
             <th>Horas trabalhada</th>
+            <th>Faturamento</th>
             <th>Gasto com comb</th>
             <th>Gasto por km</th>
-            <th>Ganho por km</th>
-            <th>Lucro</th>
+            <th>Lucro por km</th>
+            <th>Lucro por hora</th>
+            <th>Lucro dia</th>
         </tr>
     {% for result in results %}
             <tr class="{% cycle 'row-gray' 'row-white'%}">
                 <td><a href="{% url "uber:result_detail" result.id %}">{{result.data_criacao|date:"d/m/Y"}}</a></td>
                 <td>{{result.horas_trab}}</td>
-                <td>R$ {{result.gasto_com_comb|floatformat:2}}</td>
-                <td>R$ {{result.gasto_por_km|floatformat:2}}</td>
-                <td>R$ {{result.ganho_por_km|floatformat:2}}</td>
-                <td>R$ {{result.lucro|floatformat:2}}</td>
+                <td>R$ {{result.faturamento|floatformat:2}}</td>
+                <td class="color-gasto">R$ {{result.gasto_com_comb|floatformat:2}}</td>
+                <td class="color-gasto">R$ {{result.gasto_por_km|floatformat:2}}</td>
+                <td class="color-lucro">R$ {{result.ganho_por_km|floatformat:2}}</td>
+                <td class="color-lucro">R$ {{result.ganho_hora|floatformat:2}}</td>
+                <td class="color-lucro">R$ {{result.lucro|floatformat:2}}</td>
             </tr>
             {% endfor %}
         </table>
 </div>
+
+<div class="total-container">
+    <h1><span style="color:blue">Total</span>/<span style="color:purple">Média</span></h1>
+    <table>
+        <tr>
+            <th>Dias trabalhado</th>
+            <th>Horas trabalhada</th>
+            <th>Faturamento</th>
+            <th>Gasto com comb</th>
+            <th>Gasto por km</th>
+            <th>Lucro por km</th>
+            <th>Lucro por hora</th>
+            <th>Lucro </th>
+        </tr>
+        <tr class="{% cycle 'row-gray' 'row-white'%}">
+            <td> <span class="color-total">{{total_dias}}</span></td>
+            <td> <span class="color-total">{{total_horas_trab}}</span>/<span class="color-media">{{media_horas_trab}}</span></td>
+            <td> <span class="color-total">{{total_faturamento}}</span>/<span class="color-media">{{media_faturamento|floatformat:2}}</span></td>
+            <td><span class="color-total">{{total_gasto_comb}}</span>/<span class="color-media">{{media_gasto_comb|floatformat:2}}</span></td>
+            <td><span class="color-media">{{media_gasto_km}}</span></td>
+            <td><span class="color-media">{{media_lucro_km}}</span></td>
+            <td><span class="color-media">{{media_lucro_hora}}</span></td>
+            <td><span class="color-total">{{total_lucro}}</span>/<span class="color-media">{{media_lucro|floatformat:2}}</span></td>
+        </tr>
+</div>
     
 {% endblock content %}
-
-{% comment %} <div class="result-content">
-    <p>Data: {{result.data_criacao}}</p> 
-    <p>Gasto por km rodado: R${{result.gasto_por_km}}</p>
-    <p>Preço do combustivel com desconto: R${{result.comb_com_desc}}</p>
-    <p>Gasto com combustivel: R${{result.gasto_com_comb}}</p>
-    <p>Ganho por km rodado: R${{result.ganho_por_km}}</p>
-    <p>Lucro: R${{result.lucro}}</p>
-</div> {% endcomment %}

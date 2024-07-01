@@ -1,10 +1,12 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.utils import timezone
 
 class CalculationForm(forms.Form):
     data_criacao = forms.DateField(
         label='Data',
         required=True,
+        initial=timezone.now(),
         widget=forms.DateInput(
             attrs={
                 'class':'form-control',
