@@ -1,12 +1,17 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.utils import timezone
+import pytz
 
 class CalculationForm(forms.Form):
+    sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
+    now_in_sp = timezone.now().astimezone(sao_paulo_tz).strftime('%Y-%m-%d')
     data_criacao = forms.DateField(
         label='Data',
         required=True,
-        initial=timezone.now(),
+        initial=now_in_sp,
         widget=forms.DateInput(
             attrs={
                 'class':'form-control',
@@ -28,7 +33,7 @@ class CalculationForm(forms.Form):
         widget=forms.NumberInput(
             attrs={
                 'class':'form-control',
-                'placeholder':'Digite o desconto do combustivel'
+                'placeholder':'Digite o desconto do combustivel',
             }
     ))
     km_por_litro = forms.FloatField(
@@ -62,7 +67,7 @@ class CalculationForm(forms.Form):
         )
     )
     faturamento = forms.FloatField(
-        label='Quanto você faturou hoje ?',
+        label='Faturamento',
         required=True,
         widget=forms.NumberInput(
             attrs={
@@ -98,3 +103,32 @@ class CalculationForm(forms.Form):
             )
         return km_rodado
     
+class CreationFormUser(UserCreationForm):
+    first_name = forms.CharField(
+        required=True,
+        min_length=3,
+        label='Primeiro nome',
+    )
+    last_name = forms.CharField(
+        required=True,
+        min_length=3,
+        label='Sobrenome ',
+        )
+    email = forms.EmailField()
+    
+    class Meta:
+        model = User
+        fields = (
+            'first_name', 'last_name', 'email', 'username', 'password1', 'password2',
+        )
+        
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            self.add_error(
+                'email',
+                ValidationError('Um usuário ocom este email já existe.')
+            )
+        return email
+
+   

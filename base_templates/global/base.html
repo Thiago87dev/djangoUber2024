@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -5,8 +6,10 @@
 </head>
 <body>
     {% include "global/partials/_header.html" %}
+    {% include "global/partials/_messages.html" %}
     <main>
         {% block content %}{% endblock content %}
     </main>
+    <script src="{% static "global/js/script.js" %}"></script>
 </body>
 </html>

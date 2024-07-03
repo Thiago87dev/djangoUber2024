@@ -37,13 +37,13 @@ body {
 a {
     text-decoration: none;
     margin-bottom: 1.5rem;
-    color: black;
+    color: blue;
     position: relative;
     border-bottom: 2px solid transparent;
 }
 
 a:hover{
-   border-bottom-color: black; 
+   border-bottom-color: blue; 
 }
 
 .titulo {
@@ -86,7 +86,23 @@ a:hover{
     height: 5rem;
     gap: 2rem;
     width: 100%;
+    font-size: 2rem;
+}
 
+.user-form-control{
+    display: flex;
+    height: 5rem;
+    gap: 2rem;
+   
+}
+
+.user-form-control input{
+    font-size: 2rem;
+    width: 48rem;
+}
+
+.form-control::placeholder{
+    font-size: 1.5rem;
 }
 
 .btn {
@@ -111,11 +127,57 @@ a:hover{
     list-style: none;
 }
 
+.help-text,
+.help-text ~ ul{
+    margin: 0;
+    font-size: 1.4rem;
+    list-style: none;
+}
+
 .result-all-container{
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 4rem;
+}
+
+.title-filter{
+    display: flex;
+    width: 80%;
+    justify-content: space-around;
+    margin-top: 4rem;
+}
+
+.title-filter p {
+    font-weight: bold;
+}
+
+.form-filter{
+    margin-top: .2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.form-filter-control{
+    display: flex;
+    height: 3rem;
+    gap: 2rem;
+    width: 100%;
+}
+
+.btn-filter {
+    padding: .2rem;
+    font-size: 2rem;
+    background-color: rgb(58, 58, 58);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: .3rem;
+}
+
+.btn-filter:hover{
+    background-color: rgb(220, 220, 220);
+    color: rgb(58, 58, 58);
 }
 
 .result-content{
@@ -190,3 +252,53 @@ table td{
     color:purple; 
     font-weight:bold;
 }
+
+.message {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 4rem;
+  }
+  
+  .message.success {
+    background: rgba(0, 255, 0, 0.3);
+    border: 1px solid rgba(0, 255, 0, 90%);
+  }
+  
+  .message.error {
+    background: rgba(255, 0, 0, 0.3);
+    border: 1px solid rgba(255, 0, 0, 90%);
+  }
+  
+  .message.warning {
+    background: rgba(255, 255, 0, 0.3);
+    border: 1px solid rgba(255, 255, 0, 90%);
+  }
+  
+  .message.info {
+    background: rgba(0, 0, 255, 0.3);
+    border: 1px solid rgba(0, 0, 255, 0.3);
+  }
+
+  .btn-apagar{
+    background-color: red;
+  }
+
+  .btn-apagar:hover{
+    transform: scale(1.1);
+    background-color: red;
+    color: white;
+
+  }
+
+  .btn-atualizar{
+    background-color: blue;
+  }
+
+  .btn-atualizar:hover{
+    transform: scale(1.1);
+    background-color: blue;
+    color: white;
+  }

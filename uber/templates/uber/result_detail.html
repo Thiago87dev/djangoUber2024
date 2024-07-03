@@ -14,9 +14,13 @@
     <p class="result-p"> <span>Faturamento</span> <span>R$ {{result.faturamento|floatformat:2}}</span></p>
     <p class="result-p"> <span>Gasto com combustivel:</span> <span style="color: red">R$ {{result.gasto_com_comb|floatformat:2}}</span></p>
     <p class="result-p"> <span>Gasto por km rodado:</span> <span style="color: red">R$ {{result.gasto_por_km|floatformat:2}}</span></p>
-    <p class="result-p"> <span>Lucro por hora:</span> <span style="color: green">R$ {{result.ganho_hora|floatformat:2}}</span></p>
     <p class="result-p"> <span>Lucro por km rodado:</span> <span style="color: green">R$ {{result.ganho_por_km|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Lucro por hora:</span> <span style="color: green">R$ {{result.ganho_hora|floatformat:2}}</span></p>
     <p class="result-p"> <span>Lucro:</span> <span style="color: green">R$ {{result.lucro|floatformat:2}}</span></p>
+    <div>
+        <button class="btn btn-atualizar">Atualizar</button>
+        <button class="btn btn-apagar">Apagar</button>
+    </div>
 </div>
     
 {% endblock content %}

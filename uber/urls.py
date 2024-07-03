@@ -5,8 +5,13 @@ app_name = 'uber'
 
 urlpatterns = [
     path('',views.index, name='index'),
+    path('filter/',views.filter, name='filter'),
     path('result/',views.result_view, name='result_view'),
     path('save/',views.save_result, name='save_result'),
     path('resultall/',views.result_all, name='result_all'),
     path('result/<int:result_id>',views.result_detail, name='result_detail'),
+    
+    path('user/create/', views.createUser, name='create_user'),
+    path('user/login/', views.login_view, name='login'),
+    path('user/logout/', views.logout_view, name='logout'),
 ]

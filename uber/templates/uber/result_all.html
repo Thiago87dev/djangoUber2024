@@ -2,7 +2,28 @@
 
 {% block content %}
 <div class="result-all-container">
-    <h1>Historico</h1>
+    <div class="title-filter">
+        <h1>Historico</h1>
+        <div >
+            <p>Filtrar por data</p>
+             <form class="form-filter" action="{% url "uber:filter" %}" method="GET">
+                    <input type="date" 
+                    class="form-filter-control" 
+                    id="startdate"
+                    name="startdate"
+                    value="{{start_date}}"
+                    >
+                    <input type="date" 
+                    class="form-filter-control" 
+                    id="enddate"
+                    name="enddate"
+                    value="{{end_date}}"
+                    >
+                    <button class="btn-filter" type="submit">Filtrar</button>
+            </form>
+        </div>
+
+    </div>
     <table>
         <tr>
             <th>Data</th>
@@ -43,14 +64,14 @@
             <th>Lucro </th>
         </tr>
         <tr class="{% cycle 'row-gray' 'row-white'%}">
-            <td> <span class="color-total">{{total_dias}}</span></td>
-            <td> <span class="color-total">{{total_horas_trab}}</span>/<span class="color-media">{{media_horas_trab}}</span></td>
-            <td> <span class="color-total">{{total_faturamento}}</span>/<span class="color-media">{{media_faturamento|floatformat:2}}</span></td>
+            <td><span class="color-total">{{total_dias}}</span></td>
+            <td><span class="color-total">{{total_horas_trab}}</span>/<span class="color-media">{{media_horas_trab}}</span></td>
+            <td><span class="color-total">{{total_faturamento}}</span>/<span class="color-media">{{media_faturamento|floatformat:2}}</span></td>
             <td><span class="color-total">{{total_gasto_comb}}</span>/<span class="color-media">{{media_gasto_comb|floatformat:2}}</span></td>
-            <td><span class="color-media">{{media_gasto_km}}</span></td>
-            <td><span class="color-media">{{media_lucro_km}}</span></td>
-            <td><span class="color-media">{{media_lucro_hora}}</span></td>
-            <td><span class="color-total">{{total_lucro}}</span>/<span class="color-media">{{media_lucro|floatformat:2}}</span></td>
+            <td><span class="color-media">{{media_gasto_km|floatformat:2}}</span></td>
+            <td><span class="color-media">{{media_lucro_km|floatformat:2}}</span></td>
+            <td><span class="color-media">{{media_lucro_hora|floatformat:2}}</span></td>
+            <td><span class="color-total">{{total_lucro|floatformat:2}}</span>/<span class="color-media">{{media_lucro|floatformat:2}}</span></td>
         </tr>
 </div>
     
