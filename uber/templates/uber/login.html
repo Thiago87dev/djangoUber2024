@@ -5,7 +5,7 @@
     <h2>Login</h2>
     {% if user.is_authenticated %}
         <p>
-            Você esta logado como {{user.username}} <br> clique <a href="{% url "uber:logout" %}">aqui</a> para sair
+            Você esta logado como <span style="color:#b22222">{{user.username}}</span> <br> clique <a href="{% url "uber:logout" %}">aqui</a> para sair
         </p>
     {% else %}
         {% include "uber/partials/user-form.html" %}

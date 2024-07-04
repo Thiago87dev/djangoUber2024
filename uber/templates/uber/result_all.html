@@ -38,7 +38,7 @@
     {% for result in results %}
             <tr class="{% cycle 'row-gray' 'row-white'%}">
                 <td><a href="{% url "uber:result_detail" result.id %}">{{result.data_criacao|date:"d/m/Y"}}</a></td>
-                <td>{{result.horas_trab}}</td>
+                <td>{{result.horas_trab|date:'H:i'}}</td>
                 <td>R$ {{result.faturamento|floatformat:2}}</td>
                 <td class="color-gasto">R$ {{result.gasto_com_comb|floatformat:2}}</td>
                 <td class="color-gasto">R$ {{result.gasto_por_km|floatformat:2}}</td>
@@ -66,8 +66,8 @@
         <tr class="{% cycle 'row-gray' 'row-white'%}">
             <td><span class="color-total">{{total_dias}}</span></td>
             <td><span class="color-total">{{total_horas_trab}}</span>/<span class="color-media">{{media_horas_trab}}</span></td>
-            <td><span class="color-total">{{total_faturamento}}</span>/<span class="color-media">{{media_faturamento|floatformat:2}}</span></td>
-            <td><span class="color-total">{{total_gasto_comb}}</span>/<span class="color-media">{{media_gasto_comb|floatformat:2}}</span></td>
+            <td><span class="color-total">{{total_faturamento|floatformat:2}}</span>/<span class="color-media">{{media_faturamento|floatformat:2}}</span></td>
+            <td><span class="color-total">{{total_gasto_comb|floatformat:2}}</span>/<span class="color-media">{{media_gasto_comb|floatformat:2}}</span></td>
             <td><span class="color-media">{{media_gasto_km|floatformat:2}}</span></td>
             <td><span class="color-media">{{media_lucro_km|floatformat:2}}</span></td>
             <td><span class="color-media">{{media_lucro_hora|floatformat:2}}</span></td>

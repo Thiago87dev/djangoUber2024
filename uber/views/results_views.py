@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from uber.models import ResultUber
 from django.db.models import Sum, Avg, Count
+from django.contrib import messages
 import math
 
 def result_view(request):
@@ -31,6 +32,7 @@ def save_result(request):
             
         )
         del request.session['calculation_result']
+        messages.success(request, 'Dados cadastrado com sucesso')
         return redirect('uber:result_all')
     return redirect('uber:index')
 

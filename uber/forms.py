@@ -1,13 +1,28 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm
+from uber.models import ResultUber
 from django.contrib.auth.models import User
 from django.utils import timezone
 import pytz
 
-class CalculationForm(forms.Form):
+class CalculationForm(forms.ModelForm):
     sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
     now_in_sp = timezone.now().astimezone(sao_paulo_tz).strftime('%Y-%m-%d')
+
+    
+    class Meta:
+        model = ResultUber
+        fields = [
+            'data_criacao',
+            'preco_comb',
+            'desc_comb',
+            'km_por_litro',
+            'km_rodado',
+            'horas_trab',
+            'faturamento'
+        ]
+    
     data_criacao = forms.DateField(
         label='Data',
         required=True,
@@ -76,7 +91,9 @@ class CalculationForm(forms.Form):
             }
     ))
     
-    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+           
     def clean_km_por_litro(self):
         km_por_litro = self.cleaned_data.get('km_por_litro')
         
