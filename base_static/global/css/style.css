@@ -302,3 +302,8 @@ table td{
     background-color: blue;
     color: white;
   }
+
+  .containter-update-delete{
+    display: flex;
+    gap: 3rem;
+  }

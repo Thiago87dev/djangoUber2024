@@ -7,3 +7,14 @@ messages.forEach((message)=>{
         setTimeout(()=> message.remove(),500)
     }, 2500);
 })
+
+const btnDelete = document.querySelector('[data-js="btn-delete"]')
+const deleteForm = document.querySelector('[data-js="delete-form"]')
+
+btnDelete.addEventListener('click',(e)=>{
+    e.preventDefault()
+    const confirmation = confirm("Você tem certeza ? Esta ação é irreversível.")
+    if(confirmation){
+        deleteForm.submit()
+    }
+})

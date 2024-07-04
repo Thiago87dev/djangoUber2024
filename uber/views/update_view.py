@@ -1,14 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from uber.models import ResultUber
 from uber.forms import CalculationForm
-from django.urls import reverse
-
-from django.shortcuts import render, redirect, get_object_or_404
-from uber.models import ResultUber
-from uber.forms import CalculationForm
 from django.contrib import messages
-from django.utils import timezone
-import pytz
 
 def update(request, result_id):
     result = get_object_or_404(ResultUber, id=result_id)
