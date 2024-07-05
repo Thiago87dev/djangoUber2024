@@ -48,6 +48,7 @@ def index(request):
                 'km_por_litro':km_por_litro,
                 'ganho_hora':ganho_hora,
                 'desc_comb':desc_comb,
+                'owner':request.user.id,
             }
             
             # ResultUber.objects.create(

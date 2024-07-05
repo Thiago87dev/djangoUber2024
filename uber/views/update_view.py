@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from uber.models import ResultUber
 from uber.forms import CalculationForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='uber:login')
 def update(request, result_id):
-    result = get_object_or_404(ResultUber, id=result_id)
+    result = get_object_or_404(ResultUber, id=result_id, owner=request.user)
     
     if request.method == 'POST':
         form = CalculationForm(request.POST, instance=result)

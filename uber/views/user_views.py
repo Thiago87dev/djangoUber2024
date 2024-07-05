@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from uber.forms import CreationFormUser
 from django.contrib import messages, auth
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 def createUser(request):
     form = CreationFormUser()
@@ -12,7 +13,7 @@ def createUser(request):
         if form.is_valid():
             messages.success(request, 'Usuário criado com sucesso')
             form.save()
-            return redirect('uber:index')
+            return redirect('uber:login')
             
     return render(
         request,
@@ -32,7 +33,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             auth.login(request, user)
-            messages.success(request, f'{user.username} Logado com sucesso')
+            messages.success(request, f'{user.username} logado com sucesso')
             return redirect('uber:index')
         messages.error(request,'Login inválido')
     
@@ -44,7 +45,8 @@ def login_view(request):
             "btn_text":'Login'
         }
     )
-    
+ 
+@login_required(login_url='uber:login')   
 def logout_view(request):
     auth.logout(request)
     return redirect('uber:login')

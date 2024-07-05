@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from uber.models import ResultUber
 from django.utils import timezone
 from django.contrib import messages
 from django.db.models import Sum, Avg, Count
 import math
 
+@login_required(login_url='uber:login')
 def filter(request):
     results = ResultUber.objects.all()
     

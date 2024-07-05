@@ -1,6 +1,12 @@
 <nav class="navbar">
     <ul>
         <li><a href="{% url "uber:index" %}">Home</a></li>
-        <li><a href="{% url "uber:result_all" %}">Historico</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url "uber:result_all" %}">Historico</a></li>    
+        <li><a href="{% url "uber:logout" %}">Sair</a></li>    
+        {% else %}
+            <li><a href="{% url "uber:login" %}">Entrar</a></li>
+            <li><a href="{% url "uber:create_user" %}">Criar usuário</a></li>
+       {% endif %}
     </ul>
 </nav>
