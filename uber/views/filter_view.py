@@ -78,7 +78,7 @@ def filter(request):
         )
     else:
         
-        messages.info(request,'Nenhum contato encontrado'),
+        messages.info(request,'Nenhum dado encontrado'),
         return render(
             request,
             'uber/result_all.html',  
