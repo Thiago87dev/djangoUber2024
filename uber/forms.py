@@ -199,12 +199,30 @@ class CreationFormUser(UserCreationForm):
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
-        
+        first_name = self.cleaned_data.get('first_name')
+        last_name = self.cleaned_data.get('last_name')
+        email = self.cleaned_data.get('email')
+        username = self.cleaned_data.get('username')
         
         if password2 and len(password2) < 8:
             raise forms.ValidationError('Esta senha é muito curta. Deve conter pelo menos 8 caracteres.')
         
+        if password2 and password2.isdigit():
+            raise forms.ValidationError('A senha não pode ser inteiramente numerica.')
+        
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError('As senhas não coincidem.')
+        
+        if password2 and (first_name in password2):
+            raise forms.ValidationError('A senha não pode ser igual ao seu primeiro nome')
+        
+        if password2 and (last_name in password2):
+            raise forms.ValidationError('A senha não pode ser igual ao seu sobrenome')
+        
+        if password2 and (email in password2):
+            raise forms.ValidationError('A senha não pode ser igual ao seu email')
+        
+        if password2 and (username in password2):
+            raise forms.ValidationError('A senha não pode ser igual ao seu nome de usuário')
         
         return password2
