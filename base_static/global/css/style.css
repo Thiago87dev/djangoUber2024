@@ -31,7 +31,13 @@ body {
 .navbar li {
     list-style: none;
     font-size: 2rem;
- 
+}
+
+.profile-content{
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+    margin-right: 20rem;
 }
 
 a {
