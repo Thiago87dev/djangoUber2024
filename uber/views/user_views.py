@@ -11,7 +11,7 @@ def createUser(request):
         form = CreationFormUser(request.POST)
 
         if form.is_valid():
-            messages.success(request, 'Usuário criado com sucesso')
+            messages.success(request, 'User created successfully')
             form.save()
             return redirect('uber:login')
             
@@ -20,7 +20,7 @@ def createUser(request):
         'uber/create_user.html',
         {
             'form':form,
-            "btn_text":'Criar'
+            "btn_text":'Create'
         }
     )
     
@@ -33,9 +33,9 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             auth.login(request, user)
-            messages.success(request, f'{user.username} logado com sucesso')
+            messages.success(request, f'{user.username} successfully logged in')
             return redirect('uber:index')
-        messages.error(request,'Login inválido')
+        messages.error(request,'Invalid login')
     
     return render(
         request,

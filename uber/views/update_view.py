@@ -52,7 +52,7 @@ def update(request, result_id):
             result.ganho_por_km = ganho_por_km
             
             result.save()
-            messages.success(request, 'Dados atualizados com sucesso')
+            messages.success(request, 'Data updated successfully')
             return redirect('uber:result_all')
     else:
         form = CalculationForm(instance=result)
@@ -63,7 +63,7 @@ def update(request, result_id):
         {
             'form': form,
             'result': result,
-            'btn_text':'Atualizar'
+            'btn_text':'Update'
         }
     )
 

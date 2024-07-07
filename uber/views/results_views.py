@@ -38,7 +38,7 @@ def save_result(request):
             owner=owner
         )
         del request.session['calculation_result']
-        messages.success(request, 'Dados cadastrado com sucesso')
+        messages.success(request, 'Data registered successfully')
         return redirect('uber:result_all')
     return redirect('uber:index')
 
@@ -107,7 +107,7 @@ def result_all(request):
             }
     else:
         context = {
-            'empty':'Nada por aqui'
+            'empty':'Nothing here'
         }
     return render(
        request,

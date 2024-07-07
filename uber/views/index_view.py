@@ -67,7 +67,7 @@ def index(request):
         {
             'form': form,
             'form_action':form_action,
-            'btn_text':'Calcular'
+            'btn_text':'Calculate'
          }
     )
     

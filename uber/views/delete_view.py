@@ -9,7 +9,7 @@ def delete(request, result_id):
     result = get_object_or_404(ResultUber, id=result_id, owner=request.user)
     if request.method == 'POST':
         result.delete()
-        messages.success(request, 'Dados apagado com sucesso')
+        messages.success(request, 'Data deleted successfully')
         return redirect('uber:result_all')
     
     

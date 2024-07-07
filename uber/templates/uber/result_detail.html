@@ -4,24 +4,24 @@
 
 <div class="result-container">
     <h1 >Detalhes do resultado</h1>
-    <p class="result-p"> <span>Data:</span> <span>{{result.data_criacao|date:"d/m/Y"}}</span></p> 
-    <p class="result-p"> <span>Horas trabalhada:</span> <span>{{result.horas_trab|date:'H:i'}}</span></p> 
-    <p class="result-p"> <span>Km rodado:</span> <span>{{result.km_rodado}}</span></p> 
-    <p class="result-p"> <span>Autonomia ( Km/L)</span> <span>{{result.km_por_litro}}</span></p> 
-    <p class="result-p"> <span>Preço combustivel:</span> <span>R$ {{result.preco_comb|floatformat:2}}</span></p>
-    <p class="result-p"> <span>Desconto combustivel:</span> <span>{{result.desc_comb|floatformat:2}}%</span></p>
-    <p class="result-p"> <span>Combustivel com desconto:</span> <span>R$ {{result.comb_com_desc|floatformat:2}}</span></p>
-    <p class="result-p"> <span>Faturamento</span> <span>R$ {{result.faturamento|floatformat:2}}</span></p>
-    <p class="result-p"> <span>Gasto com combustivel:</span> <span style="color: red">R$ {{result.gasto_com_comb|floatformat:2}}</span></p>
-    <p class="result-p"> <span>Gasto por km rodado:</span> <span style="color: red">R$ {{result.gasto_por_km|floatformat:2}}</span></p>
-    <p class="result-p"> <span>Lucro por km rodado:</span> <span style="color: green">R$ {{result.ganho_por_km|floatformat:2}}</span></p>
-    <p class="result-p"> <span>Lucro por hora:</span> <span style="color: green">R$ {{result.ganho_hora|floatformat:2}}</span></p>
-    <p class="result-p"> <span>Lucro:</span> <span style="color: green">R$ {{result.lucro|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Date:</span> <span>{{result.data_criacao|date:"d/m/Y"}}</span></p> 
+    <p class="result-p"> <span>Worked hours:</span> <span>{{result.horas_trab|date:'H:i'}}</span></p> 
+    <p class="result-p"> <span>km driven:</span> <span>{{result.km_rodado}}</span></p> 
+    <p class="result-p"> <span>Autonomy ( Km/L)</span> <span>{{result.km_por_litro}}</span></p> 
+    <p class="result-p"> <span>Fuel price:</span> <span>R$ {{result.preco_comb|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Fuel discount (in %):</span> <span>{{result.desc_comb|floatformat:2}}%</span></p>
+    <p class="result-p"> <span>Discounted fuel:</span> <span>R$ {{result.comb_com_desc|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Billings</span> <span>R$ {{result.faturamento|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Fuel expense:</span> <span style="color: red">R$ {{result.gasto_com_comb|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Spend per km:</span> <span style="color: red">R$ {{result.gasto_por_km|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Profit per km:</span> <span style="color: green">R$ {{result.ganho_por_km|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Profit per hour:</span> <span style="color: green">R$ {{result.ganho_hora|floatformat:2}}</span></p>
+    <p class="result-p"> <span>Profit day:</span> <span style="color: green">R$ {{result.lucro|floatformat:2}}</span></p>
     <div class="containter-update-delete">
-        <a href="{% url "uber:update" result.id %}"><button class="btn btn-atualizar">Atualizar</button></a>
+        <a href="{% url "uber:update" result.id %}"><button class="btn btn-atualizar">Update</button></a>
         <form data-js="delete-form" action="{% url "uber:delete" result.id %}" method="POST">
             {% csrf_token %}
-            <button data-js="btn-delete" type="submit" class="btn btn-apagar">Apagar</button>
+            <button data-js="btn-delete" type="submit" class="btn btn-apagar">Delete</button>
         </form>
     </div>
 </div>

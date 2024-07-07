@@ -3,10 +3,9 @@
 {% block content %}
 <div class="result-all-container">
     <div class="title-filter">
-        <h1>Historico</h1>
-        {% if results %}
+        <h1>Records</h1>
             <div >
-                <p>Filtrar por data</p>
+                <p>Filter by date</p>
                 <form class="form-filter" action="{% url "uber:filter" %}" method="GET">
                         <input type="date" 
                         class="form-filter-control" 
@@ -20,23 +19,22 @@
                         name="enddate"
                         value="{{end_date}}"
                         >
-                        <button class="btn-filter" type="submit">Filtrar</button>
+                        <button class="btn-filter" type="submit">Filter</button>
                 </form>
             </div>
-        {% endif %}
 
     </div>
     {% if results %}
     <table>
         <tr>
-            <th>Data</th>
-            <th>Horas trabalhada</th>
-            <th>Faturamento</th>
-            <th>Gasto com comb</th>
-            <th>Gasto por km</th>
-            <th>Lucro por km</th>
-            <th>Lucro por hora</th>
-            <th>Lucro dia</th>
+            <th>Date</th>
+            <th>Worked hours</th>
+            <th>Billings</th>
+            <th>Fuel expense</th>
+            <th>Spend per km</th>
+            <th>Profit per km</th>
+            <th>Profit per hour</th>
+            <th>Profit day</th>
         </tr>
         {% for result in results %}
             <tr class="{% cycle 'row-gray' 'row-white'%}">
@@ -53,23 +51,22 @@
     </table>
     {% else %}
         <h2>{{empty}}</h2>
-        <p>Adicione dados <a href="{% url "uber:index" %}">aqui</a></p>
     {% endif %}
 </div>
 
 {% if results %}
     <div class="total-container">
-        <h1><span style="color:blue">Total</span>/<span style="color:purple">Média</span></h1>
+        <h1><span style="color:blue">Total</span>/<span style="color:purple">Average</span></h1>
         <table>
             <tr>
-                <th>Dias trabalhado</th>
-                <th>Horas trabalhada</th>
-                <th>Faturamento</th>
-                <th>Gasto com comb</th>
-                <th>Gasto por km</th>
-                <th>Lucro por km</th>
-                <th>Lucro por hora</th>
-                <th>Lucro </th>
+                <th>Worked days</th>
+                <th>Worked hours</th>
+                <th>Billings</th>
+                <th>Fuel expense</th>
+                <th>Spend per km</th>
+                <th>Profit per km</th>
+                <th>Profit per hour</th>
+                <th>Profit day</th>
             </tr>
             <tr class="{% cycle 'row-gray' 'row-white'%}">
                 <td><span class="color-total">{{total_dias}}</span></td>

@@ -26,7 +26,7 @@ class CalculationForm(forms.ModelForm):
         ]
     
     data_criacao = forms.DateField(
-        label='Data',
+        label='Date',
         required=True,
         initial=now_in_sp,
         widget=forms.DateInput(
@@ -36,7 +36,7 @@ class CalculationForm(forms.ModelForm):
             }
     ))
     preco_comb = forms.FloatField(
-        label='Preço do combustivel',
+        label='Fuel price',
         required=True,
         widget=forms.NumberInput(
             attrs={
@@ -45,7 +45,7 @@ class CalculationForm(forms.ModelForm):
             }
     ))
     desc_comb = forms.FloatField(
-        label='Desconto do combustivel (em %)',
+        label='Fuel discount (in %)',
         required=True,
         widget=forms.NumberInput(
             attrs={
@@ -54,7 +54,7 @@ class CalculationForm(forms.ModelForm):
             }
     ))
     km_por_litro = forms.FloatField(
-        label='Quantos km seu carro faz por litro ?',
+        label='Vehicle autonomy',
         required=True,
         widget=forms.NumberInput(
             attrs={
@@ -63,7 +63,7 @@ class CalculationForm(forms.ModelForm):
             }
     ))
     km_rodado = forms.FloatField(
-        label='Quantos km você rodou ?',
+        label='km driven',
         required=True,
         widget=forms.NumberInput(
             attrs={
@@ -72,7 +72,7 @@ class CalculationForm(forms.ModelForm):
             }
     ))
     horas_trab = forms.TimeField(
-        label='Horas trabalhada',
+        label='Worked hours',
         required=False,
         widget=forms.TimeInput(
             format='%H:%M',
@@ -84,7 +84,7 @@ class CalculationForm(forms.ModelForm):
         )
     )
     faturamento = forms.FloatField(
-        label='Faturamento',
+        label='Billings',
         required=True,
         widget=forms.NumberInput(
             attrs={
@@ -103,7 +103,7 @@ class CalculationForm(forms.ModelForm):
             self.add_error(
                 'km_por_litro',
                 ValidationError(
-                    'Este campo não pode ser 0',
+                    'This field cannot be zero',
                     code='invalid'
                 )
             )
@@ -116,7 +116,7 @@ class CalculationForm(forms.ModelForm):
             self.add_error(
                 'km_rodado',
                 ValidationError(
-                    'Este campo não pode ser 0',
+                    'This field cannot be zero',
                     code='invalid'
                 )
             )
@@ -129,7 +129,7 @@ class CalculationForm(forms.ModelForm):
             self.add_error(
                 'horas_trab',
                 ValidationError(
-                    'Este campo não pode ser 0',
+                    'This field cannot be zero',
                     code='invalid'
                 )
             )
@@ -139,38 +139,12 @@ class CreationFormUser(UserCreationForm):
     first_name = forms.CharField(
         required=True,
         min_length=3,
-        label='Primeiro nome',
     )
     last_name = forms.CharField(
         required=True,
         min_length=3,
-        label='Sobrenome ',
         )
     email = forms.EmailField()
-    
-    username = forms.CharField(
-        required=True ,
-        min_length=3,
-        label='Usuário',
-        help_text='Obrigatório. 150 caracteres ou menos. Somente letras, dígitos e @/./+/-/_.'  
-    )
-    
-    password1 = forms.CharField(
-        label='Senha',
-        strip=False,
-        widget=forms.PasswordInput,
-        help_text=mark_safe('Sua senha não pode ser muito semelhante às suas outras informações pessoais.<br>'
-                   'Sua senha deve conter pelo menos 8 caracteres.<br>'
-                   'Sua senha não pode ser uma senha comumente usada.<br>'
-                   'Sua senha não pode ser totalmente numérica.')
-    )
-    
-    password2 = forms.CharField(
-        label='Confirmação de senha',
-        strip=False,
-        widget=forms.PasswordInput,
-        help_text='Insira a mesma senha que foi digitada anteriormente, para verificação'
-    )
     
     class Meta:
         model = User
@@ -180,49 +154,13 @@ class CreationFormUser(UserCreationForm):
         
     def clean_email(self):
         email = self.cleaned_data.get('email')
+        current_email = self.instance.email
         if User.objects.filter(email=email).exists():
             self.add_error(
                 'email',
-                ValidationError('Um usuário com este email já existe.',code='invalid')
+                ValidationError('A user with this email already exists.',code='invalid')
             )
         return email
+
     
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-        if User.objects.filter(username=username).exists():
-            self.add_error(
-                'username',
-                ValidationError('Um usuário com este username já existe.',code='invalid')
-            )
-        return username
     
-    def clean_password2(self):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
-        first_name = self.cleaned_data.get('first_name')
-        last_name = self.cleaned_data.get('last_name')
-        email = self.cleaned_data.get('email')
-        username = self.cleaned_data.get('username')
-        
-        if password2 and len(password2) < 8:
-            raise forms.ValidationError('Esta senha é muito curta. Deve conter pelo menos 8 caracteres.')
-        
-        if password2 and password2.isdigit():
-            raise forms.ValidationError('A senha não pode ser inteiramente numerica.')
-        
-        if password1 and password2 and password1 != password2:
-            raise forms.ValidationError('As senhas não coincidem.')
-        
-        if password2 and (first_name in password2):
-            raise forms.ValidationError('A senha não pode ser igual ao seu primeiro nome')
-        
-        if password2 and (last_name in password2):
-            raise forms.ValidationError('A senha não pode ser igual ao seu sobrenome')
-        
-        if password2 and (email in password2):
-            raise forms.ValidationError('A senha não pode ser igual ao seu email')
-        
-        if password2 and (username in password2):
-            raise forms.ValidationError('A senha não pode ser igual ao seu nome de usuário')
-        
-        return password2

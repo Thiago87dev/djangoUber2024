@@ -8,7 +8,7 @@ import math
 
 @login_required(login_url='uber:login')
 def filter(request):
-    results = ResultUber.objects.all()
+    results = ResultUber.objects.filter(owner=request.user).order_by('-data_criacao') 
     
     start_date = request.GET.get('startdate')
     end_date = request.GET.get('enddate')
@@ -80,9 +80,16 @@ def filter(request):
         )
     else:
         
-        messages.info(request,'Nenhum dado encontrado'),
+        context = {
+            'results': results,
+            'start_date':start_date.strftime('%Y-%m-%d'),
+            'end_date':end_date.strftime('%Y-%m-%d'),
+        }
+        
+        messages.info(request,'No data found'),
         return render(
             request,
             'uber/result_all.html',  
+            context,
         )
     
