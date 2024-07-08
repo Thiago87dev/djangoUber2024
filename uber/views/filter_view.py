@@ -33,7 +33,7 @@ def filter(request):
         media_lucro = round(results.aggregate(Avg('lucro'))['lucro__avg'],2)
     
         # Pegando total de horas trabalhadas(em decimal)
-        sql_horas_trab = ResultUber.objects.filter(data_criacao__gte=start_date, data_criacao__lte=end_date)
+        sql_horas_trab = ResultUber.objects.filter(owner=request.user,data_criacao__gte=start_date, data_criacao__lte=end_date)
         total_horas_trab = 0
         for i in sql_horas_trab:
         

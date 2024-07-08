@@ -21,10 +21,18 @@ body {
     display: flex;
     justify-content: center;
     padding: 2rem;
+    background-color: rgb(27, 27, 28);
+    margin-bottom: 3rem;
+}
+
+.menu{
+    display: flex;
+    gap: 2rem;
 }
 
 .navbar ul {
     display: flex;
+    align-items: center;
     gap: 2rem;
 }
 
@@ -35,21 +43,31 @@ body {
 
 .profile-content{
     display: flex;
-    justify-content: flex-end;
-    gap: 2rem;
-    margin-right: 20rem;
-}
+    gap: 2rem;  
 
+}
 a {
     text-decoration: none;
     margin-bottom: 1.5rem;
-    color: blue;
+    color: rgb(7, 18, 234);
     position: relative;
     border-bottom: 2px solid transparent;
 }
 
 a:hover{
-   border-bottom-color: blue; 
+    border-bottom-color: blue; 
+ }
+
+nav a {
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    color: rgb(255, 255, 255);
+    position: relative;
+    border-bottom: 2px solid transparent;
+}
+
+nav a:hover{
+   border-bottom-color: rgb(255, 255, 255);; 
 }
 
 .titulo {

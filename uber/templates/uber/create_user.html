@@ -3,7 +3,7 @@
 
 <div class="form-container">
     {% if not user.is_authenticated %}
-    <h2>Create user</h2>
+    <h1>Create user</h1>
         {% include "uber/partials/user-form.html" %}
     {% else %}
         <h2>You need to logout to create a user</h2>

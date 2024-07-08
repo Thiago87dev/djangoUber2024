@@ -1,19 +1,21 @@
 <header>
-    <div class="profile-content">
-        <a href="{% url "uber:login" %}" class="profile">{{user.username}}</a>
-        {% if user.is_authenticated %}
-            <a href="{% url "uber:logout" %}" class="profile">Logout</a>
-        {% endif %}
-    </div>
     <nav class="navbar">
         <ul>
-            <li><a href="{% url "uber:index" %}">Home</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url "uber:result_all" %}">Records</a></li>     
-            {% else %}
+            <div class="menu">
+                <li><a href="{% url "uber:index" %}">Home</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url "uber:result_all" %}">Records</a></li>     
+                {% else %}
                 <li><a href="{% url "uber:login" %}">Login</a></li>
                 <li><a href="{% url "uber:create_user" %}">Create user</a></li>
-           {% endif %}
+                {% endif %}
+            </div>
+            <div class="profile-content">
+                <li><a href="{% url "uber:login" %}" class="profile">{{user.username}}</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url "uber:logout" %}" class="profile">Logout</a></li>
+                {% endif %}
+            </div>
         </ul>
     </nav>
 
