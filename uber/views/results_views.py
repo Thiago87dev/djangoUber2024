@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from uber.models import ResultUber
 from django.db.models import Sum, Avg, Count
+from django.core.paginator import Paginator
 from django.contrib import messages
 import math
 
@@ -53,6 +54,11 @@ def result_detail(request, result_id):
 @login_required(login_url='uber:login')
 def result_all(request):
     result = ResultUber.objects.filter(owner=request.user).order_by('-data_criacao') 
+    
+    paginator = Paginator(result, 31)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    
     if result:
         total_dias = result.aggregate(Count('id'))['id__count']
         total_faturamento = result.aggregate(Sum('faturamento'))['faturamento__sum']
@@ -90,7 +96,7 @@ def result_all(request):
         
         
         context = {
-            'results':result,
+            'results':page_obj,
             'total_dias':total_dias,
             'total_faturamento':total_faturamento,
             'media_faturamento':media_faturamento,
@@ -103,7 +109,7 @@ def result_all(request):
             'media_lucro':media_lucro,
             'total_horas_trab':total_horas_trab_formatada,
             'media_horas_trab':media_horas_trab_formatada,
-    
+            'mostrar_pagination': total_dias >= 31,
             }
     else:
         context = {

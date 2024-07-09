@@ -54,7 +54,7 @@ a {
     border-bottom: 2px solid transparent;
 }
 
-a:hover{
+.link-date:hover{
     border-bottom-color: blue; 
  }
 
@@ -330,4 +330,8 @@ table td{
   .containter-update-delete{
     display: flex;
     gap: 3rem;
+  }
+
+  .pagination a{
+    color: rgb(63, 37, 236);
   }

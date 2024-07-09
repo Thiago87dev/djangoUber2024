@@ -38,7 +38,7 @@
         </tr>
         {% for result in results %}
             <tr class="{% cycle 'row-gray' 'row-white'%}">
-                <td><a href="{% url "uber:result_detail" result.id %}">{{result.data_criacao|date:"d/m/Y"}}</a></td>
+                <td><a class="link-date" href="{% url "uber:result_detail" result.id %}">{{result.data_criacao|date:"d/m/Y"}}</a></td>
                 <td>{{result.horas_trab|date:'H:i'}}</td>
                 <td>R$ {{result.faturamento|floatformat:2}}</td>
                 <td class="color-gasto">R$ {{result.gasto_com_comb|floatformat:2}}</td>
@@ -52,6 +52,10 @@
     {% else %}
         <h2>{{empty}}</h2>
     {% endif %}
+    {% if mostrar_pagination %}
+        {% include "global/partials/_pagination.html" %}
+    {% endif %}
+
 </div>
 
 {% if results %}

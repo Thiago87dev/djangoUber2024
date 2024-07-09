@@ -4,12 +4,13 @@ from uber.models import ResultUber
 from django.utils import timezone
 from django.contrib import messages
 from django.db.models import Sum, Avg, Count
+from django.core.paginator import Paginator
 import math
 
 @login_required(login_url='uber:login')
 def filter(request):
     results = ResultUber.objects.filter(owner=request.user).order_by('-data_criacao') 
-    
+     
     start_date = request.GET.get('startdate')
     end_date = request.GET.get('enddate')
     if not start_date or not end_date:
@@ -19,6 +20,10 @@ def filter(request):
     end_date = timezone.datetime.strptime(end_date, '%Y-%m-%d').date()
     
     results = results.filter(data_criacao__gte=start_date, data_criacao__lte=end_date).order_by('-data_criacao')
+    
+    paginator = Paginator(results, 31)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     
     if results.exists():
         total_dias = results.aggregate(Count('id'))['id__count']
@@ -56,7 +61,7 @@ def filter(request):
         media_horas_trab_formatada = f'{media_horas}:{media_minutos}'
         
         context = {
-        'results': results,
+        'results': page_obj,
         'start_date':start_date.strftime('%Y-%m-%d'),
         'end_date':end_date.strftime('%Y-%m-%d'),
         'total_dias':total_dias,
@@ -71,6 +76,7 @@ def filter(request):
         'media_lucro':media_lucro,
         'total_horas_trab':total_horas_trab_formatada,
         'media_horas_trab':media_horas_trab_formatada,
+        'mostrar_pagination': total_dias >= 31,
         }
             
         return render(

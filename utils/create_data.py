@@ -67,4 +67,4 @@ def create_fake_data(num_records, username):
         )
 
 # Gerar registros falsos
-create_fake_data(60,'mariazinha')
+create_fake_data(5,'mariazinha')
