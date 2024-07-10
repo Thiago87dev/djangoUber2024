@@ -20,7 +20,7 @@ class ResultUber(models.Model):
     km_por_litro = models.FloatField()
     ganho_hora = models.FloatField()
     desc_comb = models.FloatField()
-    owner = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     
     def __str__(self):
         return 'Resultados'

@@ -13,7 +13,7 @@ const deleteForm = document.querySelector('[data-js="delete-form"]')
 
 btnDelete.addEventListener('click',(e)=>{
     e.preventDefault()
-    const confirmation = confirm("Você tem certeza ? Esta ação é irreversível.")
+    const confirmation = confirm("Are you sure ? This action is irreversible.")
     if(confirmation){
         deleteForm.submit()
     }

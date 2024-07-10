@@ -9,11 +9,13 @@ import math
 
 def result_view(request):
     calculation_result = request.session.get('calculation_result')
-    return render(
-        request,
-        'uber/result.html',
-        {'result': calculation_result}
-    )
+    if calculation_result:
+        return render(
+            request,
+            'uber/result.html',
+            {'result': calculation_result}
+        )
+    return redirect('uber:index')
 @login_required(login_url='uber:login')
 def save_result(request):
     calculation_result = request.session.get('calculation_result')
