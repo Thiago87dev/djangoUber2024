@@ -34,7 +34,8 @@ def index(request):
             ganho_por_km = round(lucro / km_rodado,2)
              
             # Criando a sessão 
-            request.session['calculation_result'] = {
+            # request.session['calculation_result'] = {
+            calculation_result = {
                 'data_criacao': data_criacao,
                 'gasto_por_km': gasto_por_km,
                 'gasto_com_comb':gasto_com_comb,
@@ -48,16 +49,13 @@ def index(request):
                 'km_por_litro':km_por_litro,
                 'ganho_hora':ganho_hora,
                 'desc_comb':desc_comb,
-                'owner':request.user.id,
+                # 'owner':request.user.id,
             }
+            if request.user.is_authenticated:
+                calculation_result['owner'] = request.user.id
+                
+            request.session['calculation_result'] = calculation_result
             
-            # ResultUber.objects.create(
-            #     gasto_por_km=gasto_por_km,
-            #     gasto_com_comb=gasto_com_comb,
-            #     comb_com_desc=comb_com_desc,
-            #     lucro=lucro,
-            #     ganho_por_km=ganho_por_km,
-            # )
             return redirect('uber:result_view')
     else:         
         form = CalculationForm()

@@ -33,8 +33,12 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             auth.login(request, user)
+            
+            if 'calculation_result' in request.session:
+                request.session['calculation_result']['owner'] = user.id
+                
             messages.success(request, f'{user.username} successfully logged in')
-            return redirect('uber:index')
+            return redirect('uber:result_view')
         messages.error(request,'Invalid login')
     
     return render(
