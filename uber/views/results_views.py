@@ -55,7 +55,15 @@ def result_detail(request, result_id):
     )
 @login_required(login_url='uber:login')
 def result_all(request):
-    result = ResultUber.objects.filter(owner=request.user).order_by('-data_criacao') 
+    result = ResultUber.objects.filter(owner=request.user)
+    order_by = request.GET.get('order_by', '-data_criacao')
+    
+    if order_by.startswith('-'):
+        descending = True
+    else:
+        descending = False
+        
+    result = result.order_by(order_by)
     
     paginator = Paginator(result, 31)
     page_number = request.GET.get("page")
@@ -99,6 +107,8 @@ def result_all(request):
         
         context = {
             'results':page_obj,
+            'order_by':order_by,
+            'descending':descending,
             'total_dias':total_dias,
             'total_faturamento':total_faturamento,
             'media_faturamento':media_faturamento,

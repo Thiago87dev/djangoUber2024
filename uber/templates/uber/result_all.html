@@ -27,14 +27,46 @@
     {% if results %}
     <table>
         <tr>
-            <th>Date</th>
-            <th>Worked hours</th>
-            <th>Billings</th>
-            <th>Fuel expense</th>
-            <th>Spend per km</th>
-            <th>Profit per km</th>
-            <th>Profit per hour</th>
-            <th>Profit day</th>
+            <th>
+                <a href="?startdate={{ start_date }}&enddate={{ end_date }}&order_by={% if order_by == '-data_criacao' and descending %}data_criacao{% else %}-data_criacao{% endif %}">
+                    Date
+                </a>   
+            </th>
+            <th>
+                <a href="?startdate={{ start_date }}&enddate={{ end_date }}&order_by={% if order_by == '-horas_trab' and descending %}horas_trab{% else %}-horas_trab{% endif %}">
+                    Worked hours
+                </a> 
+            </th>
+            <th>
+                <a href="?startdate={{ start_date }}&enddate={{ end_date }}&order_by={% if order_by == '-faturamento' and descending %}faturamento{% else %}-faturamento{% endif %}">
+                    Billings
+                </a>
+            </th>
+            <th>
+                <a href="?startdate={{ start_date }}&enddate={{ end_date }}&order_by={% if order_by == '-gasto_com_comb' and descending %}gasto_com_comb{% else %}-gasto_com_comb{% endif %}">
+                    Fuel expense
+                </a>
+            </th>
+            <th>
+                <a href="?startdate={{ start_date }}&enddate={{ end_date }}&order_by={% if order_by == '-gasto_por_km' and descending %}gasto_por_km{% else %}-gasto_por_km{% endif %}">
+                    Spend per km
+                </a>
+            </th>
+            <th>
+                <a href="?startdate={{ start_date }}&enddate={{ end_date }}&order_by={% if order_by == '-ganho_por_km' and descending %}ganho_por_km{% else %}-ganho_por_km{% endif %}">
+                    Profit per km
+                </a>
+            </th>
+            <th>
+                <a href="?startdate={{ start_date }}&enddate={{ end_date }}&order_by={% if order_by == '-ganho_hora' and descending %}ganho_hora{% else %}-ganho_hora{% endif %}">
+                    Profit per hour
+                </a>
+            </th>
+            <th>
+                <a href="?startdate={{ start_date }}&enddate={{ end_date }}&order_by={% if order_by == '-lucro' and descending %}lucro{% else %}-lucro{% endif %}">
+                    Profit day
+                </a>  
+            </th>
         </tr>
         {% for result in results %}
             <tr class="{% cycle 'row-gray' 'row-white'%}">

@@ -9,17 +9,34 @@ import math
 
 @login_required(login_url='uber:login')
 def filter(request):
-    results = ResultUber.objects.filter(owner=request.user).order_by('-data_criacao') 
-     
+    results = ResultUber.objects.filter(owner=request.user)
+    
     start_date = request.GET.get('startdate')
     end_date = request.GET.get('enddate')
-    if not start_date or not end_date:
-        return redirect('uber:result_all')
-    # Convertendo string para data
-    start_date = timezone.datetime.strptime(start_date,'%Y-%m-%d').date() 
-    end_date = timezone.datetime.strptime(end_date, '%Y-%m-%d').date()
+    order_by = request.GET.get('order_by', '-data_criacao')
     
-    results = results.filter(data_criacao__gte=start_date, data_criacao__lte=end_date).order_by('-data_criacao')
+    
+    if start_date and end_date:
+        
+        # Convertendo string para data
+        start_date = timezone.datetime.strptime(start_date, '%Y-%m-%d').date()
+        end_date = timezone.datetime.strptime(end_date, '%Y-%m-%d').date()
+        
+        # Fazendo a conulta com as datas
+        results = results.filter(data_criacao__gte=start_date, data_criacao__lte=end_date)
+    else:
+        messages.error(request, 'Start date and end date are required.')
+        return redirect('uber:result_all')
+    
+    # Lógica de ordenação
+    if order_by.startswith('-'):
+        order_by_field = order_by[1:]
+        descending = True
+    else:
+        order_by_field = order_by
+        descending = False
+        
+    results = results.order_by(('-' if descending else '') + order_by_field)
     
     paginator = Paginator(results, 31)
     page_number = request.GET.get("page")
@@ -62,6 +79,8 @@ def filter(request):
         
         context = {
         'results': page_obj,
+        'order_by':order_by,
+        'descending':descending,
         'start_date':start_date.strftime('%Y-%m-%d'),
         'end_date':end_date.strftime('%Y-%m-%d'),
         'total_dias':total_dias,
@@ -90,6 +109,8 @@ def filter(request):
             'results': results,
             'start_date':start_date.strftime('%Y-%m-%d'),
             'end_date':end_date.strftime('%Y-%m-%d'),
+            'order_by': order_by_field,
+            'descending': descending,
         }
         
         messages.info(request,'No data found'),
