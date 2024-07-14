@@ -25,8 +25,11 @@
 
     </div>
     {% if results %}
-    <table>
+    <table class="table">
         <tr>
+            <th>
+                Day
+            </th>
             <th>
                 <a href="?startdate={{ start_date }}&enddate={{ end_date }}&order_by={% if order_by == '-data_criacao' and descending %}data_criacao{% else %}-data_criacao{% endif %}">
                     Date
@@ -34,8 +37,7 @@
             </th>
             <th>
                 <a href="?startdate={{ start_date }}&enddate={{ end_date }}&order_by={% if order_by == '-horas_trab' and descending %}horas_trab{% else %}-horas_trab{% endif %}">
-                    Worked hours
-                </a> 
+                    Wrk Hrs 
             </th>
             <th>
                 <a href="?startdate={{ start_date }}&enddate={{ end_date }}&order_by={% if order_by == '-faturamento' and descending %}faturamento{% else %}-faturamento{% endif %}">
@@ -70,6 +72,7 @@
         </tr>
         {% for result in results %}
             <tr class="{% cycle 'row-gray' 'row-white'%}">
+                <td>{{result.data_criacao|date:"l"}}</td>
                 <td><a class="link-date" href="{% url "uber:result_detail" result.id %}">{{result.data_criacao|date:"d/m/Y"}}</a></td>
                 <td>{{result.horas_trab|date:'H:i'}}</td>
                 <td>R$ {{result.faturamento|floatformat:2}}</td>

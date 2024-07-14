@@ -47,7 +47,7 @@ body {
 
 }
 a {
-    text-decoration: none;
+    text-decoration: none;  
     margin-bottom: 1.5rem;
     color: rgb(7, 18, 234);
     position: relative;
@@ -56,6 +56,11 @@ a {
 
 .link-date:hover{
     border-bottom-color: blue; 
+ }
+
+ .table tr td,
+ .table tr th{
+    text-align: start;
  }
 
 nav a {
