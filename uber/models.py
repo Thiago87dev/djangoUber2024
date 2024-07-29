@@ -1,12 +1,12 @@
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
+
 
 class ResultUber(models.Model):
     class Meta:
         verbose_name = 'Resultado uber'
         verbose_name_plural = 'Resultados uber'
-        
+
     gasto_por_km = models.FloatField()
     gasto_com_comb = models.FloatField()
     comb_com_desc = models.FloatField()
@@ -20,8 +20,8 @@ class ResultUber(models.Model):
     km_por_litro = models.FloatField()
     ganho_hora = models.FloatField()
     desc_comb = models.FloatField()
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    
+    owner = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=True, null=True)
+
     def __str__(self):
         return 'Resultados'
-    

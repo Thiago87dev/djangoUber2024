@@ -6,13 +6,12 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 import pytz
 import datetime
-from django.utils.safestring import mark_safe
+
 
 class CalculationForm(forms.ModelForm):
     sao_paulo_tz = pytz.timezone('America/Sao_Paulo')
     now_in_sp = timezone.now().astimezone(sao_paulo_tz).strftime('%Y-%m-%d')
 
-    
     class Meta:
         model = ResultUber
         fields = [
@@ -24,62 +23,62 @@ class CalculationForm(forms.ModelForm):
             'horas_trab',
             'faturamento'
         ]
-    
+
     data_criacao = forms.DateField(
         label='Date',
         required=True,
         initial=now_in_sp,
         widget=forms.DateInput(
             attrs={
-                'class':'form-control',
-                'type':'date'
+                'class': 'form-control',
+                'type': 'date'
             }
-    ))
+        ))
     preco_comb = forms.FloatField(
         label='Fuel price',
         required=True,
         widget=forms.NumberInput(
             attrs={
-                'class':'form-control',
-                'placeholder':'Digite o preço do combustivel'
+                'class': 'form-control',
+                'placeholder': 'Digite o preço do combustivel'
             }
-    ))
+        ))
     desc_comb = forms.FloatField(
         label='Fuel discount (in %)',
         required=True,
         widget=forms.NumberInput(
             attrs={
-                'class':'form-control',
-                'placeholder':'Digite o desconto do combustivel',
+                'class': 'form-control',
+                'placeholder': 'Digite o desconto do combustivel',
             }
-    ))
+        ))
     km_por_litro = forms.FloatField(
         label='Vehicle autonomy',
         required=True,
         widget=forms.NumberInput(
             attrs={
-                'class':'form-control',
-                'placeholder':'Digite km por litro'
+                'class': 'form-control',
+                'placeholder': 'Digite km por litro'
             }
-    ))
+        ))
     km_rodado = forms.FloatField(
         label='km driven',
         required=True,
         widget=forms.NumberInput(
             attrs={
-                'class':'form-control',
-                'placeholder':'Digite km rodado'
+                'class': 'form-control',
+                'placeholder': 'Digite km rodado'
             }
-    ))
+        ))
     horas_trab = forms.TimeField(
         label='Worked hours',
         required=False,
         widget=forms.TimeInput(
             format='%H:%M',
             attrs={
-                'class':'form-control',
-                'placeholder':'HH:MM',
-                'type':'time'
+                'class': 'form-control',
+                'placeholder': 'HH:MM',
+                'type': 'time'
             }
         )
     )
@@ -88,17 +87,17 @@ class CalculationForm(forms.ModelForm):
         required=True,
         widget=forms.NumberInput(
             attrs={
-                'class':'form-control',
-                'placeholder':'Digite o faturamento'
+                'class': 'form-control',
+                'placeholder': 'Digite o faturamento'
             }
-    ))
-    
+        ))
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-           
+
     def clean_km_por_litro(self):
         km_por_litro = self.cleaned_data.get('km_por_litro')
-        
+
         if km_por_litro == 0:
             self.add_error(
                 'km_por_litro',
@@ -108,10 +107,10 @@ class CalculationForm(forms.ModelForm):
                 )
             )
         return km_por_litro
-            
+
     def clean_km_rodado(self):
         km_rodado = self.cleaned_data.get('km_rodado')
-        
+
         if km_rodado == 0:
             self.add_error(
                 'km_rodado',
@@ -121,11 +120,11 @@ class CalculationForm(forms.ModelForm):
                 )
             )
         return km_rodado
-    
+
     def clean_horas_trab(self):
         horas_trab = self.cleaned_data.get('horas_trab')
-        
-        if horas_trab == datetime.time(0,0):
+
+        if horas_trab == datetime.time(0, 0):
             self.add_error(
                 'horas_trab',
                 ValidationError(
@@ -134,7 +133,8 @@ class CalculationForm(forms.ModelForm):
                 )
             )
         return horas_trab
-    
+
+
 class CreationFormUser(UserCreationForm):
     first_name = forms.CharField(
         required=True,
@@ -143,24 +143,25 @@ class CreationFormUser(UserCreationForm):
     last_name = forms.CharField(
         required=True,
         min_length=3,
-        )
+    )
     email = forms.EmailField()
-    
+
     class Meta:
         model = User
         fields = (
-            'first_name', 'last_name', 'email', 'username', 'password1', 'password2',
+            'first_name', 'last_name', 'email', 'username', 'password1',
+            'password2',
         )
-        
+
     def clean_email(self):
         email = self.cleaned_data.get('email')
         current_email = self.instance.email
-        if User.objects.filter(email=email).exists():
-            self.add_error(
-                'email',
-                ValidationError('A user with this email already exists.',code='invalid')
-            )
+        if current_email != email:
+            if User.objects.filter(email=email).exists():
+                self.add_error(
+                    'email',
+                    ValidationError(
+                        'A user with this email already exists.',
+                        code='invalid')
+                )
         return email
-
-    
-    
