@@ -77,7 +77,8 @@ def filter(request):
         total_horas = math.floor(total_horas_trab)
         total_minutos = math.floor((total_horas_trab - total_horas) * 60)
         # Formatando a hora(total)
-        total_horas_trab_formatada = f'{total_horas}:{total_minutos}'
+        total_horas_trab_formatada = f'{total_horas}:{
+            str(total_minutos).zfill(2)}'
 
         # Pegando a media de horas trabalhada (em decimal)
         media_horas_trab = total_horas_trab / total_dias
@@ -85,7 +86,8 @@ def filter(request):
         media_horas = math.floor(media_horas_trab)
         media_minutos = math.floor((media_horas_trab - media_horas) * 60)
         # Formatando a hora(total)
-        media_horas_trab_formatada = f'{media_horas}:{media_minutos}'
+        media_horas_trab_formatada = f'{media_horas}:{
+            str(media_minutos).zfill(2)}'
 
         context = {
             'results': page_obj,
