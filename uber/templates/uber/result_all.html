@@ -39,6 +39,13 @@
                 <a href="?startdate={{ start_date }}&enddate={{ end_date }}&order_by={% if order_by == '-horas_trab' and descending %}horas_trab{% else %}-horas_trab{% endif %}">
                     Wrk Hrs 
             </th>
+            
+            <th>
+                <a href="?startdate={{ start_date }}&enddate={{ end_date }}&order_by={% if order_by == '-km_rodado' and descending %}km_rodado{% else %}-km_rodado{% endif %}">
+                    km driven
+                </a>
+            </th>
+
             <th>
                 <a href="?startdate={{ start_date }}&enddate={{ end_date }}&order_by={% if order_by == '-faturamento' and descending %}faturamento{% else %}-faturamento{% endif %}">
                     Billings
@@ -75,6 +82,7 @@
                 <td>{{result.data_criacao|date:"l"}}</td>
                 <td><a class="link-date" href="{% url "uber:result_detail" result.id %}">{{result.data_criacao|date:"d/m/Y"}}</a></td>
                 <td>{{result.horas_trab|date:'H:i'}}</td>
+                <td>R$ {{result.km_rodado}}</td>
                 <td>R$ {{result.faturamento|floatformat:2}}</td>
                 <td class="color-gasto">R$ {{result.gasto_com_comb|floatformat:2}}</td>
                 <td class="color-gasto">R$ {{result.gasto_por_km|floatformat:2}}</td>
@@ -100,6 +108,7 @@
             <tr>
                 <th>Worked days</th>
                 <th>Worked hours</th>
+                <th>Km driven</th>
                 <th>Billings</th>
                 <th>Fuel expense</th>
                 <th>Spend per km</th>
@@ -110,6 +119,7 @@
             <tr class="{% cycle 'row-gray' 'row-white'%}">
                 <td><span class="color-total">{{total_dias}}</span></td>
                 <td><span class="color-total">{{total_horas_trab}}</span>/<span class="color-media">{{media_horas_trab}}</span></td>
+                <td><span class="color-total">{{total_km_dirigido}}</span>/<span class="color-media">{{media_km_dirigido}}</span></td>
                 <td><span class="color-total">{{total_faturamento|floatformat:2}}</span>/<span class="color-media">{{media_faturamento|floatformat:2}}</span></td>
                 <td><span class="color-total">{{total_gasto_comb|floatformat:2}}</span>/<span class="color-media">{{media_gasto_comb|floatformat:2}}</span></td>
                 <td><span class="color-media">{{media_gasto_km|floatformat:2}}</span></td>

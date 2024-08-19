@@ -81,6 +81,12 @@ def result_all(request):
             'faturamento__sum']
         media_faturamento = round(result.aggregate(
             Avg('faturamento'))['faturamento__avg'], 2)
+
+        total_km_dirigido = round(result.aggregate(Sum('km_rodado'))[
+            'km_rodado__sum'], 2)
+        media_km_dirigido = round(result.aggregate(
+            Avg('km_rodado'))['km_rodado__avg'], 2)
+
         total_gasto_comb = result.aggregate(Sum('gasto_com_comb'))[
             'gasto_com_comb__sum']
         media_gasto_comb = round(result.aggregate(
@@ -125,6 +131,8 @@ def result_all(request):
             'descending': descending,
             'total_dias': total_dias,
             'total_faturamento': total_faturamento,
+            'total_km_dirigido': total_km_dirigido,
+            'media_km_dirigido': media_km_dirigido,
             'media_faturamento': media_faturamento,
             'total_gasto_comb': total_gasto_comb,
             'media_gasto_comb': media_gasto_comb,
