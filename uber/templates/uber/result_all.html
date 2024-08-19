@@ -82,7 +82,7 @@
                 <td>{{result.data_criacao|date:"l"}}</td>
                 <td><a class="link-date" href="{% url "uber:result_detail" result.id %}">{{result.data_criacao|date:"d/m/Y"}}</a></td>
                 <td>{{result.horas_trab|date:'H:i'}}</td>
-                <td>R$ {{result.km_rodado}}</td>
+                <td>{{result.km_rodado}}</td>
                 <td>R$ {{result.faturamento|floatformat:2}}</td>
                 <td class="color-gasto">R$ {{result.gasto_com_comb|floatformat:2}}</td>
                 <td class="color-gasto">R$ {{result.gasto_por_km|floatformat:2}}</td>
@@ -130,5 +130,22 @@
         </table>
     </div>
 {% endif %}
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if previous_month and previous_year %}
+                <a href="?year={{ previous_year }}&month={{ previous_month }}&order_by={{ order_by }}">Previous</a>
+            {% endif %}
+
+            <span class="current">
+                <a href="{% url "uber:result_all" %}">Current month</a>
+            </span>
+
+            {% if next_month and next_year %}
+                <a href="?year={{ next_year  }}&month={{ next_month }}&order_by={{ order_by }}">Next</a>
+            {% endif %}
+
+        </span>
+    </div>
     
 {% endblock content %}

@@ -340,3 +340,31 @@ table td{
   .pagination a{
     color: rgb(63, 37, 236);
   }
+
+  .step-links {
+    display: flex;
+    justify-content: center; /* Centraliza os links na página */
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px; /* Espaçamento entre os links */
+    font-family: Arial, sans-serif; /* Fonte padrão */
+  
+}
+
+.step-links a {
+    text-decoration: none;
+    padding: 10px 15px;
+    margin-top: 20px;
+    border: 1px solid #007bff; /* Borda azul */
+    border-radius: 5px; /* Bordas arredondadas */
+    color: #007bff; /* Cor do texto */
+    background-color: #f8f9fa; /* Cor de fundo suave */
+    transition: background-color 0.3s, color 0.3s; /* Transição suave */
+  
+}
+
+.step-links a:hover {
+    background-color: #007bff; /* Fundo azul ao passar o mouse */
+    color: white; /* Texto branco ao passar o mouse */
+}
+

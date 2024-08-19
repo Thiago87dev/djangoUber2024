@@ -6,6 +6,8 @@ from django.db.models import Sum, Avg, Count
 from django.core.paginator import Paginator
 from django.contrib import messages
 import math
+from django.utils import timezone
+from datetime import timedelta
 
 
 def result_view(request):
@@ -61,9 +63,31 @@ def result_detail(request, result_id):
 
 @login_required(login_url='uber:login')
 def result_all(request):
-    result = ResultUber.objects.filter(owner=request.user)
-    order_by = request.GET.get('order_by', '-data_criacao')
+    current_date = timezone.now()
+    year_str = request.GET.get('year', current_date.year)
+    month_str = request.GET.get('month', current_date.month)
 
+    year = int(year_str)
+    month = int(month_str)
+
+    first_day = timezone.datetime(year, month, 1)
+    if month == 12:
+        last_day = timezone.datetime(year + 1, 1, 1) - timedelta(days=1)
+    else:
+        last_day = timezone.datetime(year, month + 1, 1) - timedelta(days=1)
+
+    previous_month = (month - 1) if month > 1 else 12
+    previous_year = year if month > 1 else year - 1
+    next_month = (month + 1) if month < 12 else 1
+    next_year = year if month < 12 else year + 1
+
+    result = ResultUber.objects.filter(
+        owner=request.user,
+        data_criacao__gte=first_day,
+        data_criacao__lte=last_day
+    )
+
+    order_by = request.GET.get('order_by', '-data_criacao')
     if order_by.startswith('-'):
         descending = True
     else:
@@ -71,7 +95,7 @@ def result_all(request):
 
     result = result.order_by(order_by)
 
-    paginator = Paginator(result, 31)
+    paginator = Paginator([first_day], 1)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
@@ -102,7 +126,10 @@ def result_all(request):
 
         # Pegando total de horas trabalhadas(em decimal)
         sql_horas_trab = ResultUber.objects.filter(
-            owner=request.user).values('horas_trab')
+            owner=request.user,
+            data_criacao__gte=first_day,
+            data_criacao__lte=last_day,
+        ).values('horas_trab')
         total_horas_trab = 0
         for i in sql_horas_trab:
             i['horas_trab'] = i['horas_trab'].strftime('%H-%M-%S')
@@ -126,7 +153,8 @@ def result_all(request):
             str(media_minutos).zfill(2)}'
 
         context = {
-            'results': page_obj,
+            'results': result,
+            'page_obj': page_obj,
             'order_by': order_by,
             'descending': descending,
             'total_dias': total_dias,
@@ -144,6 +172,13 @@ def result_all(request):
             'total_horas_trab': total_horas_trab_formatada,
             'media_horas_trab': media_horas_trab_formatada,
             'mostrar_pagination': total_dias >= 31,
+            'year': year,
+            'month': month,
+            'current_date': current_date,
+            'previous_year': previous_year,
+            'previous_month': previous_month,
+            'next_year': next_year,
+            'next_month': next_month,
         }
     else:
         context = {
