@@ -17,6 +17,9 @@
     <p class="result-p"> <span>Profit per km:</span> <span style="color: green">R$ {{result.ganho_por_km|floatformat:2}}</span></p>
     <p class="result-p"> <span>Profit per hour:</span> <span style="color: green">R$ {{result.ganho_hora|floatformat:2}}</span></p>
     <p class="result-p"> <span>Profit day:</span> <span style="color: green">R$ {{result.lucro|floatformat:2}}</span></p>
+    {% if result.observacao %}
+        <p style="border: solid 2px black" class="result-p"> <span>Note: </span> <span style="text-align: center">{{result.observacao}}</span></p>
+    {% endif %}
     <div class="containter-update-delete">
         <a href="{% url "uber:update" result.id %}"><button class="btn btn-atualizar">Update</button></a>
         <form data-js="delete-form" action="{% url "uber:delete" result.id %}" method="POST">

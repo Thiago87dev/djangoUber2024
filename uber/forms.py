@@ -21,7 +21,8 @@ class CalculationForm(forms.ModelForm):
             'km_por_litro',
             'km_rodado',
             'horas_trab',
-            'faturamento'
+            'faturamento',
+            'observacao',
         ]
 
     data_criacao = forms.DateField(
@@ -40,7 +41,7 @@ class CalculationForm(forms.ModelForm):
         widget=forms.NumberInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Digite o preço do combustivel'
+                'placeholder': 'Enter the fuel price'
             }
         ))
     desc_comb = forms.FloatField(
@@ -49,7 +50,7 @@ class CalculationForm(forms.ModelForm):
         widget=forms.NumberInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Digite o desconto do combustivel',
+                'placeholder': 'Enter the fuel discount',
             }
         ))
     km_por_litro = forms.FloatField(
@@ -58,7 +59,7 @@ class CalculationForm(forms.ModelForm):
         widget=forms.NumberInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Digite km por litro'
+                'placeholder': 'Enter km per liter'
             }
         ))
     km_rodado = forms.FloatField(
@@ -67,7 +68,7 @@ class CalculationForm(forms.ModelForm):
         widget=forms.NumberInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Digite km rodado'
+                'placeholder': 'Enter km driven'
             }
         ))
     horas_trab = forms.TimeField(
@@ -88,7 +89,17 @@ class CalculationForm(forms.ModelForm):
         widget=forms.NumberInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Digite o faturamento'
+                'placeholder': 'Enter billing'
+            }
+        ))
+
+    observacao = forms.CharField(
+        label='Note',
+        required=False,
+        widget=forms.Textarea(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter note'
             }
         ))
 

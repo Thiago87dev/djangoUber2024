@@ -19,6 +19,7 @@ class ResultUber(models.Model):
     faturamento = models.FloatField()
     km_por_litro = models.FloatField()
     ganho_hora = models.FloatField()
+    observacao = models.TextField()
     desc_comb = models.FloatField()
     owner = models.ForeignKey(
         User, on_delete=models.CASCADE, blank=True, null=True)

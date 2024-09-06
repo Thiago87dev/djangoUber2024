@@ -80,7 +80,7 @@
         {% for result in results %}
             <tr class="{% cycle 'row-gray' 'row-white'%}">
                 <td>{{result.data_criacao|date:"l"}}</td>
-                <td><a class="link-date" href="{% url "uber:result_detail" result.id %}">{{result.data_criacao|date:"d/m/Y"}}</a></td>
+                <td><a class="link-date" href="{% url "uber:result_detail" result.id %}">{{result.data_criacao|date:"d/m/Y"}} </a>{% if result.observacao %} <i class="fa-regular fa-note-sticky"></i>{% endif %}</td>
                 <td>{{result.horas_trab|date:'H:i'}}</td>
                 <td>{{result.km_rodado}}</td>
                 <td>R$ {{result.faturamento|floatformat:2}}</td>
