@@ -43,6 +43,7 @@ def save_result(request):
             km_por_litro=calculation_result['km_por_litro'],
             ganho_hora=calculation_result['ganho_hora'],
             desc_comb=calculation_result['desc_comb'],
+            observacao=calculation_result['observacao'],
             owner=owner
         )
         del request.session['calculation_result']

@@ -16,6 +16,7 @@ def index(request):
             km_rodado = form.cleaned_data['km_rodado']
             horas_trab = form.cleaned_data['horas_trab']
             faturamento = form.cleaned_data['faturamento']
+            observacao = form.cleaned_data['observacao']
 
             # convertento datas para string
             data_criacao = data_criacao.strftime('%Y-%m-%d')
@@ -50,6 +51,7 @@ def index(request):
                 'km_por_litro': km_por_litro,
                 'ganho_hora': ganho_hora,
                 'desc_comb': desc_comb,
+                'observacao': observacao,
                 # 'owner':request.user.id,
             }
             if request.user.is_authenticated:
