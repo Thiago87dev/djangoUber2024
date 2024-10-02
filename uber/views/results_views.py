@@ -88,6 +88,23 @@ def result_all(request):
         data_criacao__lte=last_day
     )
 
+    if not result:
+        if month > 1:
+            first_day = timezone.datetime(year, month - 1, 1)
+        else:
+            first_day = timezone.datetime(year - 1, 12, 1)
+
+        if month == 1:
+            last_day = timezone.datetime(year, 1, 1) - timedelta(days=1)
+        else:
+            last_day = timezone.datetime(year, month, 1) - timedelta(days=1)
+
+    result = ResultUber.objects.filter(
+        owner=request.user,
+        data_criacao__gte=first_day,
+        data_criacao__lte=last_day
+    )
+
     order_by = request.GET.get('order_by', '-data_criacao')
     if order_by.startswith('-'):
         descending = True
@@ -183,7 +200,7 @@ def result_all(request):
         }
     else:
         context = {
-            'empty': 'Nothing here'
+            'empty': 'Nothing here',
         }
     return render(
         request,
