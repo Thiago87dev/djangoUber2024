@@ -29,6 +29,14 @@ def monthly_summary(request):
                 data_criacao__lte=last_day
             )
 
+            order_by = request.GET.get('order_by', 'year')
+            if order_by.startswith('-'):
+                order_by_field = order_by[1:]
+                descending = True
+            else:
+                order_by_field = order_by
+                descending = False
+
             if result:
                 total_dias = result.aggregate(Count('id'))['id__count']
                 total_faturamento = result.aggregate(Sum('faturamento'))[
@@ -102,9 +110,25 @@ def monthly_summary(request):
                     'media_horas_trab': media_horas_trab_formatada,
                     'year': year,
                     'month': month,
+
                 })
+
+                if order_by_field == 'total_horas_trab' or order_by_field == 'media_horas_trab':
+                    def convert_to_minutes(time_str):
+                        hours, minutes = map(int, time_str.split(':'))
+                        return hours * 60 + minutes
+
+                    # Ordenar usando a função convert_to_minutes
+                    summary_data = sorted(
+                        summary_data, key=lambda x: convert_to_minutes(x[order_by_field]), reverse=descending
+                    )
+                else:
+                    summary_data = sorted(
+                        summary_data, key=lambda x: float(x[order_by_field]), reverse=descending)
 
                 context = {
                     'summary_data': summary_data,
+                    'descending': descending,
+                    'order_by': order_by,
                 }
     return render(request, 'uber/monthly_summary.html', context)

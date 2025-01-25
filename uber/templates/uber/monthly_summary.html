@@ -4,21 +4,96 @@
 
     <h1>Monthly Summary</h1>
 
-    <h1><span style="color:blue">Total</span>/<span style="color:purple">Average</span></h1>
+    <h1><span class="color-total">Total</span>/<span class="color-media">Average</span></h1>
     
     <table >
         <thead>
             <tr>
-                <th>Month</th>
-                <th>Worked Days</th>
-                <th>Worked Hours</th>
-                <th>Km Driven</th>
-                <th>Billings</th>
-                <th>Fuel Expense</th>
-                <th>Spend per Km</th>
-                <th>Profit per Km</th>
-                <th>Profit per Hour</th>
-                <th>Profit per Day</th>
+                <th>
+                    <a href="?order_by={% if order_by == '-year' and descending %}year{% else %}-year{% endif %}">
+                        Month
+                    </a>
+                </th>
+                <th>
+                    <a href="?order_by={% if order_by == '-total_dias' and descending %}total_dias{% else %}-total_dias{% endif %}">
+                        Worked Days
+                    </a>
+                </th>
+                <th>
+                    <p>Worked Hours</p> 
+                    <p>
+                        <a href="?order_by={% if order_by == '-total_horas_trab' and descending %}total_horas_trab{% else %}-total_horas_trab{% endif %}">
+                            <span class="color-total">Total</span>
+                        </a>
+                            /
+                        <a href="?order_by={% if order_by == '-media_horas_trab' and descending %}media_horas_trab{% else %}-media_horas_trab{% endif %}">
+                            <span class="color-media">Average</span>
+                        </a>
+                    </p>
+                </th>
+                <th>
+                    <p>Km Driven</p>
+                    <p>
+                        <a href="?order_by={% if order_by == '-total_km_dirigido' and descending %}total_km_dirigido{% else %}-total_km_dirigido{% endif %}">
+                            <span class="color-total">Total</span>
+                        </a>
+                            /
+                        <a href="?order_by={% if order_by == '-media_km_dirigido' and descending %}media_km_dirigido{% else %}-media_km_dirigido{% endif %}">
+                            <span class="color-media">Average</span>
+                        </a>
+                    </p>
+                </th>
+                <th>
+                    <p>Billings</p>
+                    <p>
+                        <a href="?order_by={% if order_by == '-total_faturamento' and descending %}total_faturamento{% else %}-total_faturamento{% endif %}">
+                            <span class="color-total">Total</span>
+                        </a>
+                            /
+                        <a href="?order_by={% if order_by == '-media_faturamento' and descending %}media_faturamento{% else %}-media_faturamento{% endif %}">
+                            <span class="color-media">Average</span>
+                        </a>
+                    </p>
+                </th>
+                <th>
+                    <p>Fuel Expense</p>
+                    <p>
+                        <a href="?order_by={% if order_by == '-total_gasto_comb' and descending %}total_gasto_comb{% else %}-total_gasto_comb{% endif %}">
+                            <span class="color-total">Total</span>
+                        </a>
+                            /
+                        <a href="?order_by={% if order_by == '-media_gasto_comb' and descending %}media_gasto_comb{% else %}-media_gasto_comb{% endif %}">
+                            <span class="color-media">Average</span>
+                        </a>
+                    </p>
+                </th>
+                <th >
+                    <a class="color-media" href="?order_by={% if order_by == '-media_gasto_km' and descending %}media_gasto_km{% else %}-media_gasto_km{% endif %}">
+                        Spend per Km
+                    </a>
+                </th>
+                <th>
+                    <a class="color-media" href="?order_by={% if order_by == '-media_lucro_km' and descending %}media_lucro_km{% else %}-media_lucro_km{% endif %}">
+                        Profit per Km
+                    </a>
+                </th>
+                <th>
+                    <a class="color-media" href="?order_by={% if order_by == '-media_lucro_hora' and descending %}media_lucro_hora{% else %}-media_lucro_hora{% endif %}">
+                        Profit per Hour
+                    </a>
+                </th>
+                <th>
+                    <p>Profit</p>
+                    <p>
+                        <a href="?order_by={% if order_by == '-total_lucro' and descending %}total_lucro{% else %}-total_lucro{% endif %}">
+                            <span class="color-total">Total</span>
+                        </a>
+                            /
+                        <a href="?order_by={% if order_by == '-media_lucro' and descending %}media_lucro{% else %}-media_lucro{% endif %}">
+                            <span class="color-media">Average</span>
+                        </a>
+                    </p>
+                </th>
             </tr>
         </thead>
         <tbody> 
