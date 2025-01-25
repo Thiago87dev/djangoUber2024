@@ -4,10 +4,11 @@
             <div class="menu">
                 <li><a href="{% url "uber:index" %}">Home</a></li>
                 {% if user.is_authenticated %}
-                <li><a href="{% url "uber:result_all" %}">Records</a></li>     
+                    <li><a href="{% url "uber:result_all" %}">Records</a></li>     
+                    <li><a href="{% url "uber:monthly_summary" %}">Monthly Summary</a></li>     
                 {% else %}
-                <li><a href="{% url "uber:login" %}">Login</a></li>
-                <li><a href="{% url "uber:create_user" %}">Create user</a></li>
+                    <li><a href="{% url "uber:login" %}">Login</a></li>
+                    <li><a href="{% url "uber:create_user" %}">Create user</a></li>
                 {% endif %}
             </div>
             <div class="profile-content">

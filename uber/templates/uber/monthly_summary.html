@@ -1,0 +1,42 @@
+{% extends "global/base.html" %}
+{% block content %}
+<div class="result-all-container">
+
+    <h1>Monthly Summary</h1>
+
+    <h1><span style="color:blue">Total</span>/<span style="color:purple">Average</span></h1>
+    
+    <table >
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Worked Days</th>
+                <th>Worked Hours</th>
+                <th>Km Driven</th>
+                <th>Billings</th>
+                <th>Fuel Expense</th>
+                <th>Spend per Km</th>
+                <th>Profit per Km</th>
+                <th>Profit per Hour</th>
+                <th>Profit per Day</th>
+            </tr>
+        </thead>
+        <tbody> 
+            {% for data in summary_data %}
+                <tr class="{% cycle 'row-gray' 'row-white'%}">
+                    <td>{% if data.month < 10 %}0{{ data.month}}{% else %}{{ data.month}}{% endif %}/{{data.year}}</td>
+                    <td><span class="color-total">{{ data.total_dias }}</span></td>
+                    <td><span class="color-total">{{ data.total_horas_trab }}</span>/<span class="color-media">{{data.media_horas_trab}}</span></td>
+                    <td><span class="color-total">{{ data.total_km_dirigido}}</span>/<span class="color-media">{{data.media_km_dirigido}}</span></td>
+                    <td>R$ <span class="color-total">{{ data.total_faturamento|floatformat:2 }}</span>/<span class="color-media">{{data.media_faturamento|floatformat:2}}</span></td>
+                    <td>R$ <span class="color-total">{{ data.total_gasto_comb|floatformat:2 }}</span>/<span class="color-media">{{data.media_gasto_comb|floatformat:2}}</span></td>
+                    <td>R$ <span class="color-media">{{ data.media_gasto_km|floatformat:2 }}</span></td>
+                    <td>R$ <span class="color-media">{{ data.media_lucro_km|floatformat:2 }}</span></td>
+                    <td>R$ <span class="color-media">{{ data.media_lucro_hora|floatformat:2 }}</span></td>
+                    <td>R$ <span class="color-total">{{ data.total_lucro|floatformat:2 }}</span>/<span class="color-media">{{data.media_lucro|floatformat:2}}</span></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

@@ -4,3 +4,4 @@ from .filter_view import *
 from .user_views import *
 from .update_view import *
 from .delete_view import *
+from .monthly_summary import *
